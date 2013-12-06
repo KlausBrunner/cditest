@@ -13,11 +13,19 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        bean.addMessage("context initialized");
+        if(bean != null) {
+            bean.addMessage("context initialized");
+        } else {
+            System.out.println("ugh! injection into " + this.getClass().getName() + " failed!");
+        }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
-        bean.addMessage("context destroyed");
+        if(bean != null) {
+            bean.addMessage("context destroyed");
+        } else {
+            System.out.println("ugh! injection into " + this.getClass().getName() + " failed!");
+        }
     }
 }
